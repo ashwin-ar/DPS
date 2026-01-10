@@ -1,13 +1,14 @@
 #include <pthread.h>
 #include <stdio.h>
+int sum = 0;    //sum is a shared resource
 
 // P2: Parallel thread
 void *threadFunction(void *arg){
     // * arg is the thread no here??
     float *num = (float *)arg;
-
-    printf("\n Executing thread %f", *num);
-    pthread_exit(NULL); // return any value, that can be used by another thread
+    sum++;
+    printf("\n Executing thread %f & sum = %d", *num, sum);
+    //pthread_exit(NULL); // return any value, that can be used by another thread
 }
 // P1: Main Thread
 int main(){

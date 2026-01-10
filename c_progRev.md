@@ -210,3 +210,36 @@ In this case (*foo) is a pointer to the function, whose argument is of int* type
     *pointer = 10
 
     ptr = 71648aa4
+
+
+___
+
+# Structures
+
+### Structure declaration
+
+> **Method 1:**
+```
+    struct data{
+        int id;
+        int totalTime;
+    };
+```
+Wherever we need to create a varaible, we can call struct data Frame1; (same as int Frame1)
+
+> **Method 2:**
+
+```
+    struct data{
+        int id;
+        int totalTime;
+    }Frame1; // (or) Frame[3]
+```
+varaibles are already created.
+
+> **Method 3:**
+
+`typedef struct data{int id;int totalTime;} frame;`
+
+- We can use typedef, so that we don't need to write struct data everywhere.
+- Think whatever in between as one line. So whatever in between typedef & ; is called with the last identifier.
