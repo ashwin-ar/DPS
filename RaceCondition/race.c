@@ -34,6 +34,7 @@ void* counter(void* arg){
         printf(" %d", i);
     }
     
+    //pthread_exit(NULL);
     pthread_mutex_unlock(&lock);
 }
 
@@ -52,9 +53,9 @@ void main(){
     pthread_create(thread+1, NULL, fp_cntr,(void*) (dataFrame+1));
     pthread_create(thread+2, NULL, fp_cntr,(void*) (dataFrame+2));
 
-    for(int i=0;i < 3;i++){
-        pthread_join(thread[i], NULL);
-    }
+    /*for(int i=0;i < 3;i++){
+        pthread_join(thread[i], NULLa);
+    }*/
 
     pthread_mutex_destroy(&lock);
 }
