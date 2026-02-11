@@ -17,14 +17,24 @@ int main(){
     pthread_t thread[2];
     
     pthread_create(&thread[0],NULL,inc_thread, (void*) (&thread_id[0]));
-    pthread_join(thread[0],NULL);
+    //pthread_join(thread[0],NULL);
 
     pthread_create(&thread[1],NULL,inc_thread, (void*) (&thread_id[1]));
-    pthread_detach(thread[1]);
+    //pthread_detach(thread[1]);
     //pthread_join(thread[1],NULL);
 
     //Subtask-1
-    pthread_join(thread[0],NULL); // it's important to have pthread_join, if not the threads would be creataed & the main would exit
+    //pthread_join(thread[0],NULL); // it's important to have pthread_join, if not the threads would be creataed & the main would exit
     printf("main done\n");
+    /* 
+        exit in main - non blocking join - other thread will continue running, even if the main program exits
+        join - blocking - waits untill everyone is merged
+        nothing - program can return directly
+
+        detach - just says that it will clear it's own memory even if main return, but without exit it kills itself
+    */
+    pthread_exit(NULL); 
     return 0;
+    printf("this won't execute\n");
+
 }
