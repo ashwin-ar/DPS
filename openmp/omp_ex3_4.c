@@ -1,20 +1,21 @@
 #include <stdio.h>
 #include <omp.h>
-#include <time.h>
 
 int main()
 {
     long counter = 0;
     long N = 1000000;
-    double start = clock();
+    double start = omp_get_wtime();
+#pragma omp parallel for
     for (long i = 0; i < N; i++)
     {
+        #pragma omp critical
         {
             counter += 1; // no reduction, direct update
         }
     }
-    double end = clock();
+    double end = omp_get_wtime();
     printf("Final counter without reduction= %ld\n", counter);
-    printf("Execution time %f \n", (end-start)/ CLOCKS_PER_SEC);
+    printf("Execution time %f \n", (end-start));
     return 0;
 }
