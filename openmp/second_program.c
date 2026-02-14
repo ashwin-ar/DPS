@@ -18,5 +18,32 @@ int main()
         int t = omp_get_thread_num();
         printf("\n thread %d executes %d", t, i);
     }
+    printf("\n___________________");
+    printf("\n___________________");
+
+
+// exploring private clause
+#pragma omp parallel num_threads(5)
+{
+    int i=0;
+    i++;
+    printf("\t %d",i);
+}
+printf("___________________");
+int i=0;
+#pragma omp parallel private(i) num_threads(5)
+{
+    i++; // this can result in garbage value, as private just declares it, not copies/initialises the variable i
+    printf("\t %d",i);
+}
+printf("___________________");
+
+int j=0;
+#pragma omp parallel firstprivate(j) num_threads(5)
+{
+    j++; // now all thread would have got own copy of i, as firstprivate is used.
+    printf("\t %d",j);
+}
+
     return 0;
 }
