@@ -8,13 +8,19 @@ int main()
 {
     int counter = 0; 
     double start = omp_get_wtime();
-    #pragma omp parallel for reduction( +: counter)
-    for (int i = 0; i < N-1; i++)
+    #pragma omp parallel
     {
-        counter = counter+1;
+        #pragma omp single
+        {
+            printf("\n how many threads are execcuting this? = %d\n",omp_get_num_threads());
+        }
+        #pragma omp for reduction( +: counter)
+        for (int i = 0; i < N-1; i++)
+        {
+            counter = counter+1;
+        }
     }
     printf("%d",counter);
-
     // code
     double end = omp_get_wtime();
     printf("\n2. Time: %f seconds", (double)(end - start));
