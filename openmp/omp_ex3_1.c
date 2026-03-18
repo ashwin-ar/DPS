@@ -8,10 +8,14 @@ int main()
 {
     int counter = 0; 
     double start = omp_get_wtime();
-    for (int i = 0; i < N-1; i++)
-    {
-        counter++;
-    } 
+    #pragma omp parallel for num_threads(2)
+        for (int i = 0; i < N-1; i++)
+        {   
+            #pragma omp critical
+            {
+            counter++;
+            }
+        } 
     printf("%d",counter);
 
     // code
